@@ -2,12 +2,13 @@
 import React, { useEffect, useState,useCallback } from 'react';
 import MoviesList from './components/MoviesList';
 import './App.css';
+import Form from './components/form';
 
 function App() {
   const [movies, setMovies] = useState([]);
  const [isLoading,setLoading]=useState(false);
  const [error,setError]=useState(null);
-
+const [newMovieObj,setnewMovies]=useState()
 
 
 
@@ -40,10 +41,16 @@ function App() {
   useEffect(()=>{
     fetchMovieshandler();
    },[fetchMovieshandler])
- 
+
+   const handleNewMovies=(moviesData)=>{
+    setnewMovies(moviesData);
+   }
+ console.log('new movies is set',newMovieObj)
   return (
     <React.Fragment>
+       <Form onSubmit={handleNewMovies}/>
       <section>
+       
         <button onClick={fetchMovieshandler}>Fetch Movies</button>
       </section>
       <section>
