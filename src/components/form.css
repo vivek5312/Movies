@@ -1,0 +1,55 @@
+
+.form {
+    margin: 1rem auto;
+    width: 90%;
+    max-width: 40rem;
+    text-align: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  
+  .title-div {
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    font-weight: bold;
+   
+  }
+  
+  .title-text {
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    height: 40px
+  }
+  
+  .opening{
+    font-weight: bold;
+  }
+  .release {
+    
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+   
+  }
+  
+  .movies-btn {
+    display: block;
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #230052;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    align-items: center;
+    margin-left: 15rem;
+  }
+  
+  .movies-btn:hover {
+    background-color: #0056b3;
+  }
