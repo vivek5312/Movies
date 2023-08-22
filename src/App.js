@@ -20,18 +20,17 @@ function App() {
 
       const data = await response.json();
 
-      const loadedMovies=[];
+      const loadedMovies = [];
 
-      for(const key in data){
+      for (const key in data) {
         loadedMovies.push({
-          id:key,
-          title:data[key].title,
-          openingText:data[key].openingText,
-          releaseDate:data[key].releaseDate,
-        })
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
       }
 
-     
       setMovies(loadedMovies);
     } catch (error) {
       setError(error.message);
@@ -43,22 +42,35 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
- async function addMovieHandler(movie) {
-   const response=await fetch('https://react-http-fd939-default-rtdb.firebaseio.com/movies.json',{
-    method:'POST',
-    body:JSON.stringify(movie),
-    headers:{
-      'Content-Type':'application/json'
+  async function addMovieHandler(movie) {
+    const response = await fetch('https://react-http-fd939-default-rtdb.firebaseio.com/movies.json', {
+      method: 'POST',
+      body: JSON.stringify(movie),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  }
+
+  async function deleteMovieHandler(movieId) {
+    const response = await fetch(`https://react-http-fd939-default-rtdb.firebaseio.com/movies/${movieId}.json`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Deleting movie failed.');
     }
-   })
-   const data=await response.json();
-   console.log(data);
+
+    const updatedMovies = movies.filter(movie => movie.id !== movieId);
+    setMovies(updatedMovies);
   }
 
   let content = <p>Found no movies.</p>;
 
   if (movies.length > 0) {
-    content = <MoviesList movies={movies} />;
+    content = <MoviesList movies={movies} onDeleteMovie={deleteMovieHandler} />;
   }
 
   if (error) {
